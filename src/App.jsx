@@ -586,7 +586,9 @@ function FashionCard({prod, onAdd}) {
   const [qty, setQty]     = useState(1);
   const [ok, setOk]       = useState(false);
   const tagMap = {Bestseller:'best',New:'new','Pre-Order':'pre',Cashmere:'cash',Popular:'pop','Low Stock':'lo'};
+  const outOfStock = prod.availability === 'out';
   const add = () => {
+    if(outOfStock) return;
     if(prod.colors?.length && !color) { alert('Please select a colour'); return; }
     if(prod.sizes?.length > 1 && !size) { alert('Please select a size'); return; }
     onAdd(prod, color, size||prod.sizes?.[0]||'', qty);
@@ -596,8 +598,8 @@ function FashionCard({prod, onAdd}) {
     <div className="fc">
       {prod.tag && <span className={`fc-tag tag-${tagMap[prod.tag]||'new'}`}>{prod.tag}</span>}
       <div className="av-tag">
-        <span className={`av-dot av-${prod.avail}`}/>
-        {prod.avail==='in'?'In Stock':prod.avail==='lo'?'Low Stock':'Pre-Order'}
+        <span className={`av-dot av-${prod.availability}`}/>
+        {prod.availability==='in'?'In Stock':prod.availability==='lo'?'Low Stock':'Out of Stock'}
       </div>
       <div className="fc-img">
         <img src={prod.img} alt={prod.name} loading="lazy"
@@ -627,8 +629,8 @@ function FashionCard({prod, onAdd}) {
         )}
         <div className="fc-bot">
           <QtyRow qty={qty} setQty={setQty}/>
-          <button className={`fc-add${ok?' ok':''}`} onClick={add}>
-            <span>{ok?'✓ Added!':'+ Cart'}</span>
+          <button className={`fc-add${ok?' ok':outOfStock?' out':''}`} onClick={add} disabled={outOfStock} style={outOfStock?{background:'#aaa',cursor:'not-allowed'}:{}}>
+            <span>{ok?'✓ Added!':outOfStock?'Out of Stock':'+ Cart'}</span>
           </button>
         </div>
       </div>
