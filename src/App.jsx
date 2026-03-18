@@ -1,4 +1,27 @@
-import { useState, useReducer, useEffect, useRef, useCallback } from "react";
+import { useState, useReducer, useEffect, useCallback } from "react";
+import api, { buildWhatsappMessage } from "./api/service";
+
+function useProducts(category) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    api.getProducts(category)
+      .then(data => { setProducts(data); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, [category]);
+  return { products, loading };
+}
+
+function LoadingGrid({ cols = 4 }) {
+  return (
+    <div style={{display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap:16}}>
+      {Array(cols * 2).fill(0).map((_,i) => (
+        <div key={i} style={{background:"#E2EAEE",borderRadius:10,aspectRatio:"4/5"}}/>)
+      )}
+    </div>
+  );
+}
 
 /* ═══════════════════════════════════════════════════════
    DESIGN TOKENS
@@ -496,6 +519,7 @@ const cartReducer = (s, a) => {
     case 'DEL': return s.filter(i => i.key !== a.key);
     case 'QTY': return s.map(i => i.key === a.key ? {...i, qty: Math.max(1, a.qty)} : i);
     case 'LOAD': return a.data;
+    case 'CLEAR': return [];
     default: return s;
   }
 };
@@ -892,7 +916,7 @@ function HomePage({nav, onAdd}) {
         </div>
         <div className="choc-wrap">
           <div className="choc-grid">
-            {CHOCOLATES.map(c=><ChocCard key={c.id} prod={c} onAdd={onAdd}/>)}
+            {chocs.slice(0,8).map(c=><ChocCard key={c.id} prod={{...c,img:c.image_url}} onAdd={onAdd}/>)}
           </div>
           <div className="choc-more">
             <button onClick={()=>nav('chocolates')}>View All Chocolates →</button>
@@ -936,9 +960,12 @@ function HomePage({nav, onAdd}) {
       <div className="sec-py shawl-sec">
         <div className="container">
           <SH eye="Elegance Draped" h2="Shawls & Stoles" p="Handwoven traditions · Pashmina · Kashmir · Wool Blends"/>
+  const { products: shawlProds, loading: ls } = useProducts('shawls');
+          {ls ? <LoadingGrid cols={4}/> : (
           <div className="shawl-grid">
-            {SHAWLS.map(s=><ShawlCard key={s.id} prod={s} onAdd={onAdd}/>)}
+            {shawlProds.map(s=><ShawlCard key={s.id} prod={{...s,img:s.image_url}} onAdd={onAdd}/>)}
           </div>
+          )}
         </div>
       </div>
 
@@ -961,7 +988,8 @@ function HomePage({nav, onAdd}) {
 function SweatersPage({onAdd}) {
   const tabs = ['All','Ladies','Mens','Premium'];
   const [active, setActive] = useState('All');
-  const filtered = active==='All' ? SWEATERS : SWEATERS.filter(s=>s.label===active);
+  const { products, loading } = useProducts('sweaters');
+  const filtered = active==='All' ? products : products.filter(s=>s.label===active);
   return (
     <div>
       {/* Page header (Guza) */}
@@ -992,9 +1020,11 @@ function SweatersPage({onAdd}) {
 
       <div className="sec-py">
         <div className="container">
+          {loading ? <LoadingGrid cols={4}/> : (
           <div className="prod-grid">
-            {filtered.map(p=><FashionCard key={p.id} prod={p} onAdd={onAdd}/>)}
+            {filtered.map(p=><FashionCard key={p.id} prod={{...p,img:p.image_url}} onAdd={onAdd}/>)}
           </div>
+          )}
         </div>
       </div>
       <Footer nav={()=>{}}/>
@@ -1004,6 +1034,7 @@ function SweatersPage({onAdd}) {
 
 /* CHOCOLATES */
 function ChocolatesPage({onAdd}) {
+  const { products, loading } = useProducts('chocolates');
   const [show, setShow] = useState(8);
   return (
     <div>
@@ -1015,11 +1046,11 @@ function ChocolatesPage({onAdd}) {
         </div>
         <div className="choc-wrap">
           <div className="choc-grid">
-            {ALL_CHOCS.slice(0,show).map(c=><ChocCard key={c.id} prod={c} onAdd={onAdd}/>)}
+            {products.slice(0,show).map(c=><ChocCard key={c.id} prod={{...c,img:c.image_url}} onAdd={onAdd}/>)}
           </div>
-          {show < ALL_CHOCS.length && (
+          {!loading && show < products.length && (
             <div className="choc-more">
-              <button onClick={()=>setShow(ALL_CHOCS.length)}>View All {ALL_CHOCS.length} Chocolates →</button>
+              <button onClick={()=>setShow(products.length)}>View All {products.length} Chocolates →</button>
             </div>
           )}
         </div>
@@ -1035,9 +1066,12 @@ function CapsPage({onAdd}) {
       <div className="sec-py">
         <div className="container">
           <SH eye="Winter Accessories" h2="Caps & Beanies" p="Woolen · Fleece · Pom-Pom · All styles"/>
+  const { products: caps, loading: lc } = useProducts('caps');
+          {lc ? <LoadingGrid cols={4}/> : (
           <div className="cap-grid">
-            {CAPS.map(c=><FashionCard key={c.id} prod={c} onAdd={onAdd}/>)}
+            {caps.map(c=><FashionCard key={c.id} prod={{...c,img:c.image_url}} onAdd={onAdd}/>)}
           </div>
+          )}
         </div>
       </div>
       <Footer nav={()=>{}}/>
@@ -1052,9 +1086,12 @@ function ShawlsPage({onAdd}) {
       <div className="sec-py">
         <div className="container">
           <SH eye="Elegance Draped" h2="Shawls & Stoles" p="Handwoven traditions · Pashmina · Kashmir · Wool Blends"/>
+  const { products: shawlProds, loading: ls } = useProducts('shawls');
+          {ls ? <LoadingGrid cols={4}/> : (
           <div className="shawl-grid">
-            {SHAWLS.map(s=><ShawlCard key={s.id} prod={s} onAdd={onAdd}/>)}
+            {shawlProds.map(s=><ShawlCard key={s.id} prod={{...s,img:s.image_url}} onAdd={onAdd}/>)}
           </div>
+          )}
         </div>
       </div>
       <Footer nav={()=>{}}/>
@@ -1126,17 +1163,13 @@ export default function App() {
   const total = cart.reduce((s,i)=>s+i.p.price*i.qty, 0);
   const count = cart.reduce((s,i)=>s+i.qty, 0);
 
-  const sendWA = () => {
+  const sendWA = async () => {
     if(!cart.length){toast.show('🛒 Add items first!');return;}
-    let msg=`🛒 *New Order — Knit and Melt*\n━━━━━━━━━━━━━━\n\n`;
-    cart.forEach((it,i)=>{
-      msg+=`*${i+1}. ${it.p.name}*\n`;
-      if(it.color) msg+=`   🎨 Colour: ${it.color}\n`;
-      if(it.size)  msg+=`   📐 Size: ${it.size}\n`;
-      msg+=`   📦 Qty: ${it.qty}\n   💰 ₹${it.p.price.toLocaleString()} × ${it.qty} = ₹${(it.p.price*it.qty).toLocaleString()}\n\n`;
-    });
-    msg+=`━━━━━━━━━━━━━━\n💎 *Total: ₹${total.toLocaleString()}*\n\n📍 Shops 23 & 24, Boathouse Road, Ooty\nThank you! 🙏`;
+    try { await api.createOrder(cart, total); } catch(e) { console.error('Order save failed:', e); }
+    const msg = buildWhatsappMessage(cart, total);
     window.open(`https://wa.me/918675554222?text=${encodeURIComponent(msg)}`,'_blank');
+    dispatch({type:'CLEAR'});
+    toast.show('✅ Order sent! Check WhatsApp');
   };
 
   const navLinks = [

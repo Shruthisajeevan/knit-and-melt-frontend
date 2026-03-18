@@ -61,7 +61,7 @@ const api = {
   },
 };
 
-function buildWhatsappMessage(cartItems, total) {
+export function buildWhatsappMessage(cartItems, total) {
   let msg = `🛒 *New Order — Knit and Melt*\n━━━━━━━━━━━━━━\n\n`;
   cartItems.forEach((it, i) => {
     msg += `*${i + 1}. ${it.p.name}*\n`;
