@@ -817,6 +817,9 @@ function Footer({nav}) {
 
 /* HOME */
 function HomePage({nav, onAdd}) {
+  const { products: chocs, loading: lc } = useProducts('chocolates');
+  const { products: shawlProds, loading: ls } = useProducts('shawls');
+
   const cats = [
     {label:'Ladies Sweaters',sub:'Elegant knits · 10 exclusive styles',page:'sweaters',img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80'},
     {label:'Premium Sweaters',sub:'Merino · Cashmere · Luxury blends',page:'sweaters',img:'https://images.unsplash.com/photo-1614093302611-8efc4f438572?w=600&q=80'},
@@ -824,9 +827,7 @@ function HomePage({nav, onAdd}) {
     {label:'Caps & Beanies',sub:'Woolen · Fleece · All styles',page:'caps',img:'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=600&q=80'},
     {label:'Fine Chocolate Collection',sub:'50 premium varieties · Perfect gifting from the hills of Ooty',page:'chocolates',img:'https://images.unsplash.com/photo-1511381939415-e44015466834?w=900&q=80',wide:true},
   ];
-  const { products: chocs, loading: lc } = useProducts('chocolates');
-  const { products: shawlProds, loading: ls } = useProducts('shawls');
-
+ 
   return (
     <div>
       {/* HERO */}
@@ -853,6 +854,7 @@ function HomePage({nav, onAdd}) {
         </div>
       </div>
 
+      {/* CHOC PREVIEW */}
       {/* CHOC PREVIEW */}
       <div className="choc-sec">
         <div className="choc-hdr">
