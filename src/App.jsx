@@ -15,10 +15,14 @@ function useProducts(category) {
 
 function LoadingGrid({ cols = 4 }) {
   return (
-    <div style={{display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap:16}}>
-      {Array(cols * 2).fill(0).map((_,i) => (
-        <div key={i} style={{background:"#E2EAEE",borderRadius:10,aspectRatio:"4/5"}}/>)
-      )}
+    <div style={{textAlign:'center',padding:'40px 20px'}}>
+      <div style={{fontSize:'2rem',marginBottom:12}}>⏳</div>
+      <div style={{fontSize:'.85rem',color:'#7A9AA8',marginBottom:24}}>Loading products... (first load may take ~30 seconds)</div>
+      <div style={{display:"grid",gridTemplateColumns:`repeat(${cols},1fr)`,gap:16}}>
+        {Array(cols * 2).fill(0).map((_,i) => (
+          <div key={i} style={{background:"#E2EAEE",borderRadius:10,aspectRatio:"4/5",animation:'pulse 1.5s ease-in-out infinite'}}/>
+        ))}
+      </div>
     </div>
   );
 }
