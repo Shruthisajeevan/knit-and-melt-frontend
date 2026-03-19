@@ -524,9 +524,7 @@ function FashionCard({prod, onAdd}) {
   const [ok, setOk]       = useState(false);
   const tagMap = {Bestseller:'best',New:'new','Pre-Order':'pre',Cashmere:'cash',Popular:'pop','Low Stock':'lo'};
   const outOfStock = prod.availability === 'out';
-  const outOfStock = prod.availability === 'out';
   const add = () => {
-    if(outOfStock) return;
     if(outOfStock) return;
     if(prod.colors?.length && !color) { alert('Please select a colour'); return; }
     if(prod.sizes?.length > 1 && !size) { alert('Please select a size'); return; }
@@ -817,6 +815,7 @@ function Footer({nav}) {
 
 /* HOME */
 function HomePage({nav, onAdd}) {
+  const { products: shawlProds, loading: ls } = useProducts('shawls');
   const cats = [
     {label:'Ladies Sweaters',sub:'Elegant knits · 10 exclusive styles',page:'sweaters',img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80'},
     {label:'Premium Sweaters',sub:'Merino · Cashmere · Luxury blends',page:'sweaters',img:'https://images.unsplash.com/photo-1614093302611-8efc4f438572?w=600&q=80'},
@@ -903,7 +902,6 @@ function HomePage({nav, onAdd}) {
       <div className="sec-py shawl-sec">
         <div className="container">
           <SH eye="Elegance Draped" h2="Shawls & Stoles" p="Handwoven traditions · Pashmina · Kashmir · Wool Blends"/>
-  const { products: shawlProds, loading: ls } = useProducts('shawls');
           {ls ? <LoadingGrid cols={4}/> : (
           <div className="shawl-grid">
             {shawlProds.map(s=><ShawlCard key={s.id} prod={{...s,img:s.image_url}} onAdd={onAdd}/>)}
@@ -1004,12 +1002,12 @@ function ChocolatesPage({onAdd}) {
 
 /* CAPS */
 function CapsPage({onAdd}) {
+  const { products: caps, loading: lc } = useProducts('caps');
   return (
     <div className="cap-sec">
       <div className="sec-py">
         <div className="container">
           <SH eye="Winter Accessories" h2="Caps & Beanies" p="Woolen · Fleece · Pom-Pom · All styles"/>
-  const { products: caps, loading: lc } = useProducts('caps');
           {lc ? <LoadingGrid cols={4}/> : (
           <div className="cap-grid">
             {caps.map(c=><FashionCard key={c.id} prod={{...c,img:c.image_url}} onAdd={onAdd}/>)}
@@ -1024,12 +1022,12 @@ function CapsPage({onAdd}) {
 
 /* SHAWLS */
 function ShawlsPage({onAdd}) {
+  const { products: shawlProds, loading: ls } = useProducts('shawls');
   return (
     <div className="shawl-sec" style={{minHeight:'100vh'}}>
       <div className="sec-py">
         <div className="container">
           <SH eye="Elegance Draped" h2="Shawls & Stoles" p="Handwoven traditions · Pashmina · Kashmir · Wool Blends"/>
-  const { products: shawlProds, loading: ls } = useProducts('shawls');
           {ls ? <LoadingGrid cols={4}/> : (
           <div className="shawl-grid">
             {shawlProds.map(s=><ShawlCard key={s.id} prod={{...s,img:s.image_url}} onAdd={onAdd}/>)}
