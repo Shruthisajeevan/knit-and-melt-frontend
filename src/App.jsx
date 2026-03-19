@@ -441,69 +441,6 @@ const COLORS = {
   'Blush':'#F4C2C2','Midnight':'#0D0D2B','Cream':'#FAEBD7','Rust':'#B7410E',
 };
 
-const SWEATERS = [
-  {id:'SW1',name:'Floral Cable Knit',price:1850,label:'Ladies',avail:'in',tag:'Bestseller',colors:['Ivory White','Dusty Rose','Blush','Mauve'],sizes:['XS','S','M','L','XL'],img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&q=80'},
-  {id:'SW2',name:'Oversized Turtleneck',price:2200,label:'Ladies',avail:'in',tag:null,colors:['Jet Black','Wine Red','Navy Blue','Charcoal','Cream'],sizes:['S','M','L','XL','XXL'],img:'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80'},
-  {id:'SW3',name:'Ribbed Longline Cardigan',price:2400,label:'Ladies',avail:'lo',tag:'Low Stock',colors:['Camel Tan','Forest Green','Slate Gray','Cream'],sizes:['S','M','L','XL'],img:'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=500&q=80'},
-  {id:'SW4',name:'Nordic Fair Isle',price:2100,label:'Ladies',avail:'in',tag:'New',colors:['Ivory White','Navy Blue','Wine Red'],sizes:['S','M','L','XL'],img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80'},
-  {id:'SW5',name:'Merino Wool Luxury',price:4500,label:'Premium',avail:'in',tag:'Premium',colors:['Jet Black','Charcoal','Midnight','Ivory White'],sizes:['S','M','L','XL','XXL'],img:'https://images.unsplash.com/photo-1614093302611-8efc4f438572?w=500&q=80'},
-  {id:'SW6',name:'Cashmere Turtleneck',price:5200,label:'Premium',avail:'lo',tag:'Cashmere',colors:['Camel Tan','Cream','Slate Gray','Navy Blue'],sizes:['S','M','L','XL'],img:'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&q=80'},
-  {id:'SW7',name:'Heavyweight Hoodie',price:2200,label:'Mens',avail:'in',tag:null,colors:['Jet Black','Charcoal','Navy Blue','Forest Green'],sizes:['S','M','L','XL','XXL','3XL'],img:'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80'},
-  {id:'SW8',name:'Sherpa-Lined Full Zip',price:3200,label:'Mens',avail:'in',tag:'Popular',colors:['Camel Tan','Olive','Navy Blue','Rust'],sizes:['S','M','L','XL','XXL'],img:'https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=500&q=80'},
-  {id:'SW9',name:'Alpaca Blend Oversized',price:4200,label:'Premium',avail:'in',tag:null,colors:['Slate Gray','Cream','Teal'],sizes:['S','M','L','XL'],img:'https://images.unsplash.com/photo-1512327428406-f85d37e635ae?w=500&q=80'},
-  {id:'SW10',name:'Sherpa-Lined Pullover',price:2600,label:'Ladies',avail:'in',tag:null,colors:['Ivory White','Blush','Mauve'],sizes:['S','M','L','XL','XXL'],img:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&q=80'},
-];
-
-const CHOCOLATES = [
-  {id:'CH1',name:'Dark Chocolate 70%',price:280,emoji:'🍫',img:'https://images.unsplash.com/photo-1511381939415-e44015466834?w=500&q=80'},
-  {id:'CH2',name:'Milk Chocolate Classic',price:220,emoji:'🍬',img:'https://images.unsplash.com/photo-1548907040-4d42bda8ad3a?w=500&q=80'},
-  {id:'CH3',name:'Hazelnut Truffle Box',price:380,emoji:'🌰',img:'https://images.unsplash.com/photo-1606312619070-d48b5c7a159c?w=500&q=80'},
-  {id:'CH4',name:'Salted Caramel Filled',price:340,emoji:'🍮',img:'https://images.unsplash.com/photo-1619266465172-02a857c3556d?w=500&q=80'},
-  {id:'CH5',name:'Almond Dark Bar',price:300,emoji:'🥜',img:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=500&q=80'},
-  {id:'CH6',name:'Raspberry Ganache',price:360,emoji:'🫐',img:'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=500&q=80'},
-  {id:'CH7',name:'Coffee Chocolate',price:290,emoji:'☕',img:'https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?w=500&q=80'},
-  {id:'CH8',name:'Gift Assorted Box 🎁',price:950,emoji:'🎁',img:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=500&q=80'},
-];
-
-const ALL_CHOCS = [
-  ...CHOCOLATES,
-  {id:'CH9',name:'Pistachio Praline',price:400,emoji:'🫘',img:'https://images.unsplash.com/photo-1511381939415-e44015466834?w=500&q=80'},
-  {id:'CH10',name:'Mint Crisp Dark',price:250,emoji:'🌿',img:'https://images.unsplash.com/photo-1548907040-4d42bda8ad3a?w=500&q=80'},
-  {id:'CH11',name:'Coconut Dream',price:260,emoji:'🥥',img:'https://images.unsplash.com/photo-1606312619070-d48b5c7a159c?w=500&q=80'},
-  {id:'CH12',name:'Rose Cardamom Truffle',price:340,emoji:'🌹',img:'https://images.unsplash.com/photo-1619266465172-02a857c3556d?w=500&q=80'},
-  {id:'CH13',name:'Champagne Truffle',price:450,emoji:'🥂',img:'https://images.unsplash.com/photo-1528825871115-3581a5387919?w=500&q=80'},
-  {id:'CH14',name:'Saffron Milk Choco',price:420,emoji:'🌼',img:'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=500&q=80'},
-  {id:'CH15',name:'White Chocolate Bar',price:240,emoji:'🤍',img:'https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?w=500&q=80'},
-  {id:'CH16',name:'Orange Zest Dark',price:270,emoji:'🍊',img:'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=500&q=80'},
-];
-
-const CAPS = [
-  {id:'CP1',name:'Classic Woolen Beanie',price:380,avail:'in',tag:null,colors:['Jet Black','Navy Blue','Wine Red','Forest Green'],sizes:['Free Size'],img:'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=400&q=80'},
-  {id:'CP2',name:'Pom-Pom Knit Hat',price:450,avail:'in',tag:null,colors:['Ivory White','Blush','Wine Red','Mustard'],sizes:['Free Size'],img:'https://images.unsplash.com/photo-1609803384069-19f3f58e4d7a?w=400&q=80'},
-  {id:'CP3',name:'Fleece-Lined Ear Cap',price:520,avail:'in',tag:null,colors:['Jet Black','Charcoal','Camel Tan'],sizes:['Free Size','Kids'],img:'https://images.unsplash.com/photo-1529231024920-9d27cf93d6c8?w=400&q=80'},
-  {id:'CP4',name:'Sherpa Ushanka Cap',price:650,avail:'lo',tag:'Low Stock',colors:['Camel Tan','Cream','Slate Gray'],sizes:['Free Size'],img:'https://images.unsplash.com/photo-1510598155-b348f2fc74ce?w=400&q=80'},
-];
-
-const SHAWLS = [
-  {id:'SH1',name:'Pashmina Silk Blend',price:3200,tag:'Bestseller',colors:['Dusty Rose','Ivory White','Mauve','Teal'],img:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80'},
-  {id:'SH2',name:'Embroidered Kashmir Shawl',price:4800,tag:'Handcrafted',colors:['Navy Blue','Wine Red','Forest Green'],img:'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80'},
-  {id:'SH3',name:'Wool Blend Stole',price:1950,tag:null,colors:['Camel Tan','Charcoal','Cream','Mustard'],img:'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80'},
-  {id:'SH4',name:'Floral Printed Dupatta',price:1600,tag:'New',colors:['Blush','Ivory White','Cobalt'],img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80'},
-];
-
-const PERFUMES = [
-  {id:'PF1',name:'Mountain Mist EDP',price:2800,vol:'50ml',tag:'Signature',notes:'Cedar · Vetiver · Musk',img:'https://images.unsplash.com/photo-1541643600914-78b084683702?w=500&q=80'},
-  {id:'PF2',name:'Nilgiri Bloom Attar',price:1850,vol:'10ml',tag:null,notes:'Rose · Jasmine · Sandalwood',img:'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=500&q=80'},
-  {id:'PF3',name:'Cozy Winter Cologne',price:2200,vol:'100ml',tag:'Popular',notes:'Vanilla · Amber · Patchouli',img:'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=500&q=80'},
-  {id:'PF4',name:'Ooty Garden EDT',price:3200,vol:'75ml',tag:'Limited',notes:'Green Tea · Bergamot · White Musk',img:'https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500&q=80'},
-];
-
-const TEAS = [
-  {id:'TP1',name:'Nilgiri Premium CTC',price:320,weight:'250g',type:'CTC',tag:'Bestseller',img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=80'},
-  {id:'TP2',name:'Ooty Special Green Tea',price:480,weight:'100g',type:'Green',tag:'Organic',img:'https://images.unsplash.com/photo-1563911892437-1feda0179e1b?w=500&q=80'},
-  {id:'TP3',name:'Masala Chai Blend',price:280,weight:'200g',type:'Masala',tag:null,img:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=500&q=80'},
-  {id:'TP4',name:'Earl Grey Reserve',price:560,weight:'100g',type:'Earl Grey',tag:'Premium',img:'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=500&q=80'},
-];
 
 /* ═══════════════════════════════════════════════════════
    CART CONTEXT (useReducer)
