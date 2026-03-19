@@ -824,6 +824,7 @@ function HomePage({nav, onAdd}) {
     {label:'Caps & Beanies',sub:'Woolen · Fleece · All styles',page:'caps',img:'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=600&q=80'},
     {label:'Fine Chocolate Collection',sub:'50 premium varieties · Perfect gifting from the hills of Ooty',page:'chocolates',img:'https://images.unsplash.com/photo-1511381939415-e44015466834?w=900&q=80',wide:true},
   ];
+  const { products: chocs, loading: lc } = useProducts('chocolates');
   const { products: shawlProds, loading: ls } = useProducts('shawls');
 
   return (
@@ -852,19 +853,31 @@ function HomePage({nav, onAdd}) {
         </div>
       </div>
 
-      {/* CHOC PREVIEW — Delicio dark */}
+      {/* CHOC PREVIEW */}
       <div className="choc-sec">
         <div className="choc-hdr">
           <div className="choc-hdr-eye">Ooty's Finest</div>
           <h2>Fine Chocolate Collection</h2>
           <p>50 handpicked varieties · Perfect for gifting · Single origin · Truffles</p>
         </div>
+
         <div className="choc-wrap">
-          <div className="choc-grid">
-            {chocs.slice(0,8).map(c=><ChocCard key={c.id} prod={{...c,img:c.image_url}} onAdd={onAdd}/>)}
-          </div>
+          {lc ? <LoadingGrid cols={4}/> : (
+            <div className="choc-grid">
+              {chocs.slice(0,8).map(c => (
+                <ChocCard 
+                  key={c.id} 
+                  prod={{...c, img: c.image_url}} 
+                  onAdd={onAdd}
+                />
+              ))}
+            </div>
+          )}
+
           <div className="choc-more">
-            <button onClick={()=>nav('chocolates')}>View All Chocolates →</button>
+            <button onClick={()=>nav('chocolates')}>
+              View All Chocolates →
+            </button>
           </div>
         </div>
       </div>
