@@ -524,7 +524,9 @@ function FashionCard({prod, onAdd}) {
   const [ok, setOk]       = useState(false);
   const tagMap = {Bestseller:'best',New:'new','Pre-Order':'pre',Cashmere:'cash',Popular:'pop','Low Stock':'lo'};
   const outOfStock = prod.availability === 'out';
+  const outOfStock = prod.availability === 'out';
   const add = () => {
+    if(outOfStock) return;
     if(outOfStock) return;
     if(prod.colors?.length && !color) { alert('Please select a colour'); return; }
     if(prod.sizes?.length > 1 && !size) { alert('Please select a size'); return; }
@@ -579,7 +581,9 @@ function FashionCard({prod, onAdd}) {
 function ChocCard({prod, onAdd}) {
   const [qty, setQty] = useState(1);
   const [ok, setOk]   = useState(false);
+  const outOfStock = prod.availability === 'out';
   const add = () => {
+    if(outOfStock) return;
     onAdd(prod,'','',qty);
     setOk(true); setTimeout(()=>setOk(false),1800);
   };
