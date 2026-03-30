@@ -820,10 +820,10 @@ function Footer({nav}) {
 ═══════════════════════════════════════════════════════ */
 
 /* HOME */
+/* HOME */
 function HomePage({nav, onAdd}) {
-  const { products: chocs,  loading: lc } = useProducts('chocolates');
+  const { products: chocs, loading: lc } = useProducts('chocolates');
   const { products: shawls, loading: ls } = useProducts('shawls');
-
   const cats = [
     {label:'Ladies Sweaters',sub:'Elegant knits · 10 exclusive styles',page:'sweaters',img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80'},
     {label:'Premium Sweaters',sub:'Merino · Cashmere · Luxury blends',page:'sweaters',img:'https://images.unsplash.com/photo-1614093302611-8efc4f438572?w=600&q=80'},
@@ -870,7 +870,7 @@ function HomePage({nav, onAdd}) {
         <div className="choc-wrap">
           {lc ? <LoadingGrid cols={4}/> : (
             <div className="choc-grid">
-              {chocs.slice(0,8).map(c=>(
+              {chocs.slice(0,8).map(c => (
                 <ChocCard 
                   key={c.id} 
                   prod={{...c, img: c.image_url}} 
@@ -931,7 +931,7 @@ function HomePage({nav, onAdd}) {
 
           {ls ? <LoadingGrid cols={4}/> : (
             <div className="shawl-grid">
-              {shawlProds.map(s => (
+              {shawls.map(s => (
                 <ShawlCard 
                   key={s.id} 
                   prod={{...s, img: s.image_url}} 
@@ -1056,7 +1056,7 @@ function CapsPage({onAdd}) {
 
 /* SHAWLS */
 function ShawlsPage({onAdd}) {
-
+  const { products: shawls, loading: ls } = useProducts('shawls');
   return (
     <div className="shawl-sec" style={{minHeight:'100vh'}}>
       <div className="sec-py">
@@ -1064,7 +1064,7 @@ function ShawlsPage({onAdd}) {
           <SH eye="Elegance Draped" h2="Shawls & Stoles" p="Handwoven traditions · Pashmina · Kashmir · Wool Blends"/>
           {ls ? <LoadingGrid cols={4}/> : (
           <div className="shawl-grid">
-            {shawlProds.map(s=><ShawlCard key={s.id} prod={{...s,img:s.image_url}} onAdd={onAdd}/>)}
+            {shawls.map(s=><ShawlCard key={s.id} prod={{...s,img:s.image_url}} onAdd={onAdd}/>)}
           </div>
           )}
         </div>
