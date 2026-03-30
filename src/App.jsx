@@ -821,8 +821,8 @@ function Footer({nav}) {
 
 /* HOME */
 function HomePage({nav, onAdd}) {
-  const { products: chocs, loading: lc } = useProducts('chocolates');
-  const { products: shawlProds, loading: ls } = useProducts('shawls');
+  const { products: chocs,  loading: lc } = useProducts('chocolates');
+  const { products: shawls, loading: ls } = useProducts('shawls');
 
   const cats = [
     {label:'Ladies Sweaters',sub:'Elegant knits · 10 exclusive styles',page:'sweaters',img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&q=80'},
@@ -870,7 +870,7 @@ function HomePage({nav, onAdd}) {
         <div className="choc-wrap">
           {lc ? <LoadingGrid cols={4}/> : (
             <div className="choc-grid">
-              {chocs.slice(0,8).map(c => (
+              {chocs.slice(0,8).map(c=>(
                 <ChocCard 
                   key={c.id} 
                   prod={{...c, img: c.image_url}} 
@@ -1056,7 +1056,6 @@ function CapsPage({onAdd}) {
 
 /* SHAWLS */
 function ShawlsPage({onAdd}) {
-  const { products: shawlProds, loading: ls } = useProducts('shawls');
 
   return (
     <div className="shawl-sec" style={{minHeight:'100vh'}}>
