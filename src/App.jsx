@@ -1077,6 +1077,7 @@ function ShawlsPage({onAdd}) {
 /* PERFUMES & TEA */
 function PerfumesPage({onAdd}) {
   const { products: perfumes, loading } = useProducts('perfumes');
+  const { products: teas } = useProducts('teas');
 
   return (
     <div>
@@ -1095,7 +1096,7 @@ function PerfumesPage({onAdd}) {
         <div className="container">
           <SH eye="Nilgiri Grown" h2="Premium Tea Powders" p="CTC · Green · Masala · Earl Grey — straight from Ooty estates"/>
           <div className="perf-grid">
-            {TEAS.map(t=><TeaCard key={t.id} prod={t} onAdd={onAdd}/>)}
+            {teas.map(t=><TeaCard key={t.id} prod={t} onAdd={onAdd}/>)}
           </div>
         </div>
       </div>
