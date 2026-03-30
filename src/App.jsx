@@ -1076,6 +1076,8 @@ function ShawlsPage({onAdd}) {
 
 /* PERFUMES & TEA */
 function PerfumesPage({onAdd}) {
+  const { products: perfumes, loading } = useProducts('perfumes');
+
   return (
     <div>
       {/* Perfumes — dark gunmetal */}
@@ -1083,7 +1085,7 @@ function PerfumesPage({onAdd}) {
         <div className="container">
           <SH eye="Luxury Fragrances" h2="Perfumes & Attars" p="Exclusive Nilgiri blends · Cedar · Rose · Sandalwood" dark/>
           <div className="perf-grid">
-            {PERFUMES.map(p=><LuxCard key={p.id} prod={p} onAdd={onAdd}/>)}
+            {perfumes.map(p=><LuxCard key={p.id} prod={p} onAdd={onAdd}/>)}
           </div>
         </div>
       </div>
