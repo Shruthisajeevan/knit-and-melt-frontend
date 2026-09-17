@@ -1076,35 +1076,67 @@ function ShawlsPage({onAdd}) {
 
 /* PERFUMES & TEA */
 function PerfumesPage({onAdd}) {
-  const { products: perfumes, loading } = useProducts('perfumes');
-  const { products: teas } = useProducts('teas');
+  const { products: perfumes = [], loading: perfumesLoading } = useProducts('perfumes');
+  const { products: teas = [], loading: teasLoading } = useProducts('teas');
+  const loading = perfumesLoading || teasLoading;
 
   return (
     <div>
       {/* Perfumes — dark gunmetal */}
       <div className="perf-sec sec-py">
         <div className="container">
-          <SH eye="Luxury Fragrances" h2="Perfumes & Attars" p="Exclusive Nilgiri blends · Cedar · Rose · Sandalwood" dark/>
-          <div className="perf-grid">
-            {perfumes.map(p=><LuxCard key={p.id} prod={p} onAdd={onAdd}/>)}
-          </div>
+          <SH
+            eye="Luxury Fragrances"
+            h2="Perfumes & Attars"
+            p="Exclusive Nilgiri blends · Cedar · Rose · Sandalwood"
+            dark
+          />
+
+          {perfumesLoading ? (
+            <LoadingGrid cols={4}/>
+          ) : (
+            <div className="perf-grid">
+              {perfumes.map(p => (
+                <LuxCard
+                  key={p.id}
+                  prod={p}
+                  onAdd={onAdd}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       {/* Tea — clean white */}
       <div className="sec-py" style={{background:'var(--w)'}}>
         <div className="container">
-          <SH eye="Nilgiri Grown" h2="Premium Tea Powders" p="CTC · Green · Masala · Earl Grey — straight from Ooty estates"/>
-          <div className="perf-grid">
-            {teas.map(t=><TeaCard key={t.id} prod={t} onAdd={onAdd}/>)}
-          </div>
+          <SH
+            eye="Nilgiri Grown"
+            h2="Premium Tea Powders"
+            p="CTC · Green · Masala · Earl Grey — straight from Ooty estates"
+          />
+
+          {teasLoading ? (
+            <LoadingGrid cols={4}/>
+          ) : (
+            <div className="perf-grid">
+              {teas.map(t => (
+                <TeaCard
+                  key={t.id}
+                  prod={t}
+                  onAdd={onAdd}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
+
       <Footer nav={()=>{}}/>
     </div>
   );
 }
-
 /* ═══════════════════════════════════════════════════════
    ROOT APP
 ═══════════════════════════════════════════════════════ */

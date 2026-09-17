@@ -10,9 +10,19 @@ const api = {
     const url = category
       ? `${BASE_URL}/products/?category=${category}`
       : `${BASE_URL}/products/`;
+  
     const res = await fetch(url);
+  
     if (!res.ok) throw new Error('Failed to fetch products');
-    return res.json();
+  
+    const data = await res.json();
+  
+    return data.map(p => ({
+      ...p,
+      img: p.image_url,
+      vol: p.volume,
+      type: p.product_type,
+    }));
   },
 
   async getProduct(id) {
